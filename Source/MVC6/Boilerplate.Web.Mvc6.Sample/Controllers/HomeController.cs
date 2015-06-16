@@ -1,26 +1,35 @@
-﻿namespace MvcBoilerplate.Controllers
-{
-    using Microsoft.AspNet.Mvc;
-    using MvcBoilerplate.Constants;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Mvc;
 
+namespace Boilerplate.Web.Mvc6.Sample.Controllers
+{
     public class HomeController : Controller
     {
-        [HttpGet("", Name = HomeControllerRoute.GetIndex)]
         public IActionResult Index()
         {
-            return this.View(HomeControllerAction.Index);
+            return View();
         }
 
-        [HttpGet("about", Name = HomeControllerRoute.GetAbout)]
         public IActionResult About()
         {
-            return this.View(HomeControllerAction.About);
+            ViewBag.Message = "Your application description page.";
+
+            return View();
         }
 
-        [HttpGet("contact", Name = HomeControllerRoute.GetContact)]
         public IActionResult Contact()
         {
-            return this.View(HomeControllerAction.Contact);
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View("~/Views/Shared/Error.cshtml");
         }
     }
 }

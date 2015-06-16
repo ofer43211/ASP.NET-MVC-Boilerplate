@@ -1,7 +1,6 @@
 ﻿namespace Boilerplate.Web.Mvc
 {
     using System;
-    using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Mvc;
 
     /// <summary>
@@ -9,17 +8,6 @@
     /// </summary>
     public static class UrlHelperExtensions
     {
-        private static IHttpContextAccessor HttpContextAccessor;
-
-        /// <summary>
-        /// Configures the <see cref="IUrlHelper"/> extension methods.
-        /// </summary>
-        /// <param name="httpContextAccessor">The HTTP context accessor.</param>
-        public static void Configure(IHttpContextAccessor httpContextAccessor)
-        {
-            HttpContextAccessor = httpContextAccessor;
-        }
-
         /// <summary>
         /// Generates a fully qualified URL to an action method by using the specified action name, controller name and 
         /// route values.
@@ -30,13 +18,14 @@
         /// <param name="routeValues">The route values.</param>
         /// <returns>The absolute URL.</returns>
         public static string AbsoluteAction(
-            this IUrlHelper url,
+            this UrlHelper url,
             string actionName, 
             string controllerName, 
             object routeValues = null)
         {
-            string scheme = HttpContextAccessor.HttpContext.Request.Scheme;
-            return url.Action(actionName, controllerName, routeValues, scheme);
+            return null;
+            //string scheme = url.RequestContext.HttpContext.Request.Url.Scheme;
+            //return url.Action(actionName, controllerName, routeValues, scheme);
         }
 
         /// <summary>
@@ -47,10 +36,11 @@
         /// <param name="contentPath">The content path.</param>
         /// <returns>The absolute URL.</returns>
         public static string AbsoluteContent(
-            this IUrlHelper url,
+            this UrlHelper url,
             string contentPath)
         {
-            return new Uri(new Uri(HttpContextAccessor.HttpContext.Request.Path.Value), url.Content(contentPath)).ToString();
+            return null;
+            //return new Uri(url.RequestContext.HttpContext.Request.Url, url.Content(contentPath)).ToString();
         }
 
         /// <summary>
@@ -61,12 +51,13 @@
         /// <param name="routeValues">The route values.</param>
         /// <returns>The absolute URL.</returns>
         public static string AbsoluteRouteUrl(
-            this IUrlHelper url,
+            this UrlHelper url,
             string routeName,
             object routeValues = null)
         {
-            string scheme = HttpContextAccessor.HttpContext.Request.Scheme;
-            return url.RouteUrl(routeName, routeValues, scheme);
+            return null;
+            //string scheme = url.RequestContext.HttpContext.Request.Url.Scheme;
+            //return url.RouteUrl(routeName, routeValues, scheme);
         }
     }
 }
